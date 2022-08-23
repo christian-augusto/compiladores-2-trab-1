@@ -1,0 +1,9 @@
+input a 0
+input b 0
+input c 0
+output x 0
+output y 0
+output z 0
+0 1 a+ | x+
+1 2 b+ | y+
+0 1 [a+] b+ | x+ y-
