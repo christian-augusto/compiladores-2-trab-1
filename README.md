@@ -35,5 +35,5 @@ Pode ter mais de duas letras
 
 ## Dúvidas
 ```
-
+Concorrência pode ter uma decisão dentro?
 ```

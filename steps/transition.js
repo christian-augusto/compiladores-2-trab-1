@@ -12,6 +12,14 @@ class Transition {
     this.inputs = inputs;
     this.outputs = outputs;
   }
+
+  /**
+   * @function
+   * @returns {Boolean}
+   */
+  hasOutputConcurrency() {
+    return this.outputs.length > 1;
+  }
 }
 
 module.exports = Transition;

@@ -3,14 +3,13 @@ const Transition = require("./transition");
 /**
  * @function
  * @param {String} line
- *
- * @returns {Boolean}
+ * @returns {Transition}
  */
 function processTransitionLine(line) {
   const result = line.match(/^[0-9]* [0-9]*/);
 
   if (result == null) {
-    return false;
+    return null;
   }
 
   const steps = result[0].split(" ");
@@ -26,11 +25,7 @@ function processTransitionLine(line) {
   const inputs = inputsStr.split(" ");
   const outputs = outputsStr.split(" ");
 
-  const transition = new Transition(initialState, finalState, inputs, outputs);
-
-  console.log(transition);
-
-  return true;
+  return new Transition(initialState, finalState, inputs, outputs);
 }
 
 module.exports = processTransitionLine;
