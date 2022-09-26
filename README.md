@@ -15,7 +15,6 @@ output z 0
 5 0 b- | x-
 ```
 
-Pode ter 3 decisões? Pode, mas não vamos trabalhar com isso
 
 ## Concorrência
 ```
@@ -28,14 +27,59 @@ output y 0
 2 0 a- b- | x-
 ```
 
-Pode ter mais de duas letras
-
-## Decisão + Concorrência
-```
-
-```
-
 ## Dúvidas
+Concorrência pode ter uma decisão dentro? R: Não
+Pode ter 3 decisões ou mais? R: Pode, mas não vamos trabalhar com isso
+Vamos ter concorrência mais difícil do que os exemplos? R: Não
+Como seria o voltar para uma decisão?
+
+## Pseudocódigo
 ```
-Concorrência pode ter uma decisão dentro?
+function navigation(previousPartition, transition) {
+  transition.isRead = true; // preencher isRead
+  transition.betweenPartition = {}; // creates the betweenPartition
+
+  if (previousPartition != null) { // não é a primeira transition
+    // write previousPartition to transition
+  }
+
+  // write code
+
+  const transitions = [];
+
+  if (transition.next == inicio || transition.isRead) {
+    return {
+      transition,
+      next: transition.next
+    };
+  }
+
+  transition.nextPartition = {}; // creates the nextPartition
+
+  transitions.push(navigation(transition.nextPartition, transition.next[0]));
+
+  if (transition.next.length > 1) {
+    transitions.push(navigation(transition.nextPartition, transition.next[1]));
+  }
+
+  if (transitions.filter().length > 1) { // existe mais de 1 transition com início igual ao meu final
+    const t = {}; // pegar transition com final igual ao meu final
+
+    // write transition to t.nextPartition
+  } else {
+    if (transitions[0].next.previousPartition == null) {
+      transitions[0].next.previousPartition = {}; // creates the previousPartition
+    }
+
+    // write transition 1 to t.previousPartition
+
+    if (transitions[1].next.previousPartition == null) {
+      transitions[1].next.previousPartition = {}; // creates the previousPartition
+    }
+
+    // write transition 2 to t.previousPartition
+  }
+}
+
+navigation(null, transitions[0])
 ```
