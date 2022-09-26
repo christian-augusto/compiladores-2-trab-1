@@ -1,23 +1,28 @@
-const fs = require("fs/promises");
-const processLine = require("./steps/process-line");
-const { LOGS } = require("./constants");
+import fs from "fs/promises";
+import processLine from "./steps/process-line";
+import * as config from "./config";
+import Transition from "./steps/transition";
 
 async function main() {
   try {
+    config.initConfig();
+
     const data = await fs.readFile("./code.txt", { encoding: "utf8" });
 
     const lines = data.split(/\r?\n/);
 
-    const inputs = [];
-    const outputs = [];
-    const transitions = [];
+    const inputs: Array<string> = [];
+    const outputs: Array<string> = [];
+    const transitions: Array<Transition> = [];
 
-    lines.forEach(function (line) {
+    lines.forEach(function (line: string) {
       const transition = processLine(line, inputs, outputs);
 
-      if (transition) {
-        transitions.push(transition);
+      if (transition == null) {
+        return;
       }
+
+      transitions.push(transition);
     });
 
     let outputCode = "";
@@ -30,7 +35,7 @@ async function main() {
 
     outputCode += endCodeLine();
 
-    if (LOGS) {
+    if (config.GetLogs()) {
       console.log(inputs);
       console.log(outputs);
       console.log(transitions);
@@ -41,35 +46,19 @@ async function main() {
   }
 }
 
-/**
- * @function
- * @param {Array<String>} inputs
- * @returns {String}
- */
-function generateInputsDeclaration(inputs) {
+function generateInputsDeclaration(inputs: Array<string>): string {
   return `.inputs ${inputs.join(", ")}` + "\n";
 }
 
-/**
- * @function
- * @param {Array<String>} outputs
- * @returns {String}
- */
-function generateOutputsDeclaration(outputs) {
+function generateOutputsDeclaration(outputs: Array<string>): string {
   return `.outputs ${outputs.join(", ")}` + "\n";
 }
 
-/**
- * @returns {String}
- */
-function graphCodeLine() {
+function graphCodeLine(): string {
   return ".graph\n";
 }
 
-/**
- * @returns {String}
- */
-function endCodeLine() {
+function endCodeLine(): string {
   return ".end\n";
 }
 

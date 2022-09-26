@@ -1,11 +1,11 @@
-const Transition = require("./transition");
+import Transition from "./transition";
 
 /**
  * @function
  * @param {String} line
  * @returns {Transition}
  */
-function processTransitionLine(line) {
+function processTransitionLine(line: string): Transition | null {
   const result = line.match(/^[0-9]* [0-9]*/);
 
   if (result == null) {
@@ -20,7 +20,7 @@ function processTransitionLine(line) {
   const [inputsStr, outputsStr] = line
     .replace(/[\d]/gim, "")
     .split("|")
-    .map((str) => str.trim());
+    .map(str => str.trim());
 
   const inputs = inputsStr.split(" ");
   const outputs = outputsStr.split(" ");
@@ -28,4 +28,4 @@ function processTransitionLine(line) {
   return new Transition(initialState, finalState, inputs, outputs);
 }
 
-module.exports = processTransitionLine;
+export default processTransitionLine;

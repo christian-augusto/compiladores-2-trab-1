@@ -1,0 +1,27 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "16.17.0"
+        }
+      }
+    ],
+    "@babel/preset-typescript",
+    "minify"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "@config": "./src/config",
+          "@tests": "./src/tests"
+        }
+      }
+    ]
+  ],
+  "ignore": ["./src/tests"]
+}
