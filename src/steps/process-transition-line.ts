@@ -1,10 +1,5 @@
 import Transition from "./transition";
 
-/**
- * @function
- * @param {String} line
- * @returns {Transition}
- */
 function processTransitionLine(line: string): Transition | null {
   const result = line.match(/^[0-9]* [0-9]*/);
 
@@ -18,14 +13,23 @@ function processTransitionLine(line: string): Transition | null {
   const finalState = Number(steps[1]);
 
   const [inputsStr, outputsStr] = line
-    .replace(/[\d]/gim, "")
+    .replace(/[\d[\]]/gi, "")
     .split("|")
     .map(str => str.trim());
 
   const inputs = inputsStr.split(" ");
   const outputs = outputsStr.split(" ");
 
-  return new Transition(initialState, finalState, inputs, outputs);
+  return {
+    initialState,
+    finalState,
+    inputs,
+    outputs,
+    nextTransitions: [],
+    previousPartition: null,
+    betweenPartition: null,
+    isRead: false,
+  };
 }
 
 export default processTransitionLine;

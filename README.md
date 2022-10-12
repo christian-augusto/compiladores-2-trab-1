@@ -29,57 +29,64 @@ output y 0
 
 ## Dúvidas
 Concorrência pode ter uma decisão dentro? R: Não
+
 Pode ter 3 decisões ou mais? R: Pode, mas não vamos trabalhar com isso
+
 Vamos ter concorrência mais difícil do que os exemplos? R: Não
+
 Como seria o voltar para uma decisão?
 
 ## Pseudocódigo
+Captions:
 ```
-function navigation(previousPartition, transition) {
-  transition.isRead = true; // preencher isRead
-  transition.betweenPartition = {}; // creates the betweenPartition
+// allTransitions[0] é the beginning
+```
 
-  if (previousPartition != null) { // não é a primeira transition
-    // write previousPartition to transition
+### Step 1:
+
+Get transitions
+```
+Transition: {
+  nextTransitions: Transition[]
+  initialState: number;
+  finalState: number;
+  previousPartition: Partition;
+  betweenPartition: Partition;
+  isRead: boolean;
+}
+```
+
+### Step 2:
+
+Identify next transitions for each transition
+
+### Step 3:
+```
+function transitionsNavigation(currentTransition: Transition) {
+  if (previousTransition != null) {
+    // write code currentTransition.previousPartition (concurrency here to)
   }
 
-  // write code
-
-  const transitions = [];
-
-  if (transition.next == inicio || transition.isRead) {
-    return {
-      transition,
-      next: transition.next
-    };
+  if (currentTransition.isRead) {
+    return;
   }
 
-  transition.nextPartition = {}; // creates the nextPartition
+  currentTransition.isRead = true; // preencher isRead
+  currentTransition.betweenPartition = {}; // creates the betweenPartition
 
-  transitions.push(navigation(transition.nextPartition, transition.next[0]));
+  // write code currentTransition.betweenPartition
 
-  if (transition.next.length > 1) {
-    transitions.push(navigation(transition.nextPartition, transition.next[1]));
-  }
+  transitionsNavigation(currentTransition.nextTransitions[0]);
 
-  if (transitions.filter().length > 1) { // existe mais de 1 transition com início igual ao meu final
-    const t = {}; // pegar transition com final igual ao meu final
-
-    // write transition to t.nextPartition
-  } else {
-    if (transitions[0].next.previousPartition == null) {
-      transitions[0].next.previousPartition = {}; // creates the previousPartition
-    }
-
-    // write transition 1 to t.previousPartition
-
-    if (transitions[1].next.previousPartition == null) {
-      transitions[1].next.previousPartition = {}; // creates the previousPartition
-    }
-
-    // write transition 2 to t.previousPartition
+  if (currentTransition.nextTransitions.length > 1) {
+    transitionsNavigation(currentTransition.nextTransitions[1]);
   }
 }
 
-navigation(null, transitions[0])
+transitionsNavigation(allTransitions[0]);
+```
+
+### Step 4:
+```
+// write code .marking to allTransitions[0].previousPartition
 ```

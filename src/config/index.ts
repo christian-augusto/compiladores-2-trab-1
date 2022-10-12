@@ -1,24 +1,31 @@
-import development from "./development.json";
+import test from "./test.json";
 
-export function initConfig() {
-  if (isProduction()) {
+const getServerEnv = (): string => {
+  return String(process.env.ENV);
+};
+
+export const isProduction = (): boolean => {
+  return getServerEnv() == "production";
+};
+
+export const isDevelopment = (): boolean => {
+  return getServerEnv() == "development";
+};
+
+export const isTest = (): boolean => {
+  return getServerEnv() == "test";
+};
+
+export const initConfig = () => {
+  if (isProduction() || isDevelopment()) {
     return;
   }
 
   process.env = {
-    ...process.env,
-    ...development,
+    ...test,
   };
-}
+};
 
-export function isProduction(): boolean {
-  return process.env.ENV == "production";
-}
-
-export function IsDevelopment(): boolean {
-  return process.env.ENV == "development";
-}
-
-export function GetLogs(): boolean {
+export const getLogs = (): boolean => {
   return Boolean(process.env.LOGS);
-}
+};

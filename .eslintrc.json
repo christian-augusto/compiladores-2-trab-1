@@ -23,6 +23,7 @@
   "settings": {
     "import/resolver": {
       "babel-module": {
+        "@tests": ["./tests"],
         "@config": ["./src/config"]
       }
     }

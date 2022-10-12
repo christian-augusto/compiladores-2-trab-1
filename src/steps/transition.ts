@@ -1,19 +1,14 @@
-class Transition {
-  private initialState: number;
-  private finalState: number;
-  private inputs: Array<string>;
-  private outputs: Array<string>;
+import Partition from "./partition";
 
-  constructor(initialState: number, finalState: number, inputs: Array<string>, outputs: Array<string>) {
-    this.initialState = initialState;
-    this.finalState = finalState;
-    this.inputs = inputs;
-    this.outputs = outputs;
-  }
-
-  hasOutputConcurrency(): boolean {
-    return this.outputs.length > 1;
-  }
+interface Transition {
+  initialState: number;
+  finalState: number;
+  inputs: Array<string>;
+  outputs: Array<string>;
+  nextTransitions: Transition[];
+  previousPartition: Partition | null;
+  betweenPartition: Partition | null;
+  isRead: boolean;
 }
 
 export default Transition;
