@@ -22,7 +22,7 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": "16.17.1"
+    "node": "16.18.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
