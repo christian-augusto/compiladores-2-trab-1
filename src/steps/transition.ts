@@ -7,7 +7,6 @@ interface Transition {
   outputs: Array<string>;
   nextTransitions: Transition[];
   previousPartition: Partition | null;
-  betweenPartition: Partition | null;
   isRead: boolean;
 }
 

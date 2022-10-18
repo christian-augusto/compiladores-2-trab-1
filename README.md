@@ -1,6 +1,6 @@
 # Compiladores 2 trabalho 1
 
-## Decisão
+## Código 1 (decisão)
 ```
 input a 0
 input b 0
@@ -16,7 +16,7 @@ output z 0
 ```
 
 
-## Concorrência
+## Código 2 (concorrência)
 ```
 input a 0
 input b 0
@@ -34,7 +34,7 @@ Pode ter 3 decisões ou mais? R: Pode, mas não vamos trabalhar com isso
 
 Vamos ter concorrência mais difícil do que os exemplos? R: Não
 
-Como seria o voltar para uma decisão?
+Uma concorrência em um ramo de decisão pode fechar no início?
 
 ## Pseudocódigo
 Captions:

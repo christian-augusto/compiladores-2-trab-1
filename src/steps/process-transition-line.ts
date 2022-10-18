@@ -27,7 +27,6 @@ function processTransitionLine(line: string): Transition | null {
     outputs,
     nextTransitions: [],
     previousPartition: null,
-    betweenPartition: null,
     isRead: false,
   };
 }
