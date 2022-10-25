@@ -7,7 +7,6 @@ export const getPartitionId = (): number => {
 
 interface Partition {
   id: number;
-  isWritten: boolean;
 }
 
 export default Partition;

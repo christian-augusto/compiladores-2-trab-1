@@ -16,11 +16,8 @@ const transitionsNavigation = (
   if (
     previousTransition != null &&
     previousTransition.outputs.length == 1 &&
-    currentTransition.previousPartition != null &&
-    !currentTransition.previousPartition.isWritten
+    currentTransition.previousPartition != null
   ) {
-    currentTransition.previousPartition.isWritten = true;
-
     const transitionText = generateLinkPreviousPartition(
       previousTransition,
       currentTransition,
@@ -52,21 +49,19 @@ const transitionsNavigation = (
 const processSingleFlow = (currentTransition: Transition, outputCode: OutputCode) => {
   const betweenPartition: Partition = {
     id: getPartitionId(),
-    isWritten: false,
   };
 
   const transitionText = generateSingleFlowCode(currentTransition, betweenPartition);
 
   outputCode.code += transitionText;
 
-  const previousPartition: Partition = {
+  const nextPartition: Partition = {
     id: getPartitionId(),
-    isWritten: false,
   };
 
   currentTransition.nextTransitions.forEach(t => {
     if (t.previousPartition == null) {
-      t.previousPartition = previousPartition;
+      t.previousPartition = nextPartition;
     }
 
     transitionsNavigation(currentTransition, t, outputCode);
@@ -79,7 +74,6 @@ const processOpenningConcurrency = (currentTransition: Transition, outputCode: O
 
   const betweenPartition: Partition = {
     id: getPartitionId(),
-    isWritten: false,
   };
 
   let transitionText = generateSingleFlowCode(currentTransition, betweenPartition);
@@ -89,22 +83,18 @@ const processOpenningConcurrency = (currentTransition: Transition, outputCode: O
   const nextPartitions: Partition[] = [
     {
       id: getPartitionId(),
-      isWritten: true,
     },
     {
       id: getPartitionId(),
-      isWritten: true,
     },
   ];
 
   const nextBetweenPartitions: Partition[] = [
     {
       id: getPartitionId(),
-      isWritten: true,
     },
     {
       id: getPartitionId(),
-      isWritten: true,
     },
   ];
 
@@ -119,14 +109,13 @@ const processOpenningConcurrency = (currentTransition: Transition, outputCode: O
 
   outputCode.code += transitionText;
 
-  const previousPartition: Partition = {
+  const nextPartition: Partition = {
     id: getPartitionId(),
-    isWritten: false,
   };
 
   nextTransition.nextTransitions.forEach(t => {
     if (t.previousPartition == null) {
-      t.previousPartition = previousPartition;
+      t.previousPartition = nextPartition;
     }
 
     transitionsNavigation(nextTransition, t, outputCode);
@@ -137,22 +126,18 @@ const processClosingConcurrency = (currentTransition: Transition, outputCode: Ou
   const betweenPartitions: Partition[] = [
     {
       id: getPartitionId(),
-      isWritten: true,
     },
     {
       id: getPartitionId(),
-      isWritten: true,
     },
   ];
 
   const nextPartitions: Partition[] = [
     {
       id: getPartitionId(),
-      isWritten: true,
     },
     {
       id: getPartitionId(),
-      isWritten: true,
     },
   ];
 
