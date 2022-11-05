@@ -28,10 +28,12 @@ output y 0
 ```
 
 ## Dúvidas
-Concorrência pode ter uma decisão dentro? R: Não
+Concorrência pode ter uma decisão dentro? R: Não.
 
-Pode ter 3 decisões ou mais? R: Pode, mas não vamos trabalhar com isso
+Concorrência pode abrir outra concorrência? R: Não.
 
-Vamos ter concorrência mais difícil do que os exemplos? R: Não
+Pode ter 3 decisões ou mais? R: Pode, mas não vamos trabalhar com isso.
 
-Uma concorrência em um ramo de decisão pode fechar no início? R: Não
+Vamos ter concorrência mais difícil do que os exemplos? R: Não.
+
+Uma concorrência em um ramo de decisão pode fechar no início? R: Não.
