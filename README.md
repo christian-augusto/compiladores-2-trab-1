@@ -27,6 +27,25 @@ output y 0
 2 0 a- b- | x-
 ```
 
+## Código 3 (decisão + concorrência)
+```
+input a 0
+input b 0
+input c 0
+input d 0
+output e 0
+output f 0
+output g 0
+0 1 a+ | e+
+1 2 [b-] | f-
+1 3 [c+] | g-
+2 4 c+ | f+
+4 5 c+ | f+ f-
+5 0 c- | f-
+3 6 d- | g+
+6 0 d- | g-
+```
+
 ## Dúvidas
 Concorrência pode ter uma decisão dentro? R: Não.
 

@@ -1,3 +1,4 @@
+import development from "./development.json";
 import test from "./test.json";
 
 const getServerEnv = (): string => {
@@ -17,15 +18,23 @@ export const isTest = (): boolean => {
 };
 
 export const initConfig = () => {
-  if (isProduction() || isDevelopment()) {
+  if (isProduction()) {
+    return;
+  }
+
+  if (isTest()) {
+    process.env = {
+      ...test,
+    };
+
     return;
   }
 
   process.env = {
-    ...test,
+    ...development,
   };
 };
 
 export const getLogs = (): boolean => {
-  return Boolean(process.env.LOGS);
+  return String(process.env.LOGS) == "true" ? true : false;
 };
